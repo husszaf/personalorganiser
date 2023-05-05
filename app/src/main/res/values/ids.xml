@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="note_button" type="id" />
+    <item name="note" type="id" />
+    <item name="empty_notes_text_view" type="id" />
+</resources>

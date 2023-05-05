@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Personal organiser</string>
+    <string name="welcome_username">Welcome Username</string>
+    <string name="button">Open</string>
+    <string name="peterborough_weather">Peterborough weather</string>
+    <string name="note">Note</string>
+    <string name="reminder">Reminder</string>
+    <string name="schedule">Schedule</string>
+    <string name="menu">Menu</string>
+    <string name="item">Item</string>
+    <string name="note_edit_text">Add note here</string>
+    <string name="save_button">save</string>
+    <string name="schedule_window">Schedule Window</string>
+    <string name="add_the_note">Tap to add note </string>
+    <string name="search_hint">Search notes</string>
+    <string name="search">search</string>
+    <string name="notes_empty_tap_on_plus_button_to_add_note">No notes yet. Tap the + button to add a note.</string>
+    <string name="add_todo" />
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
