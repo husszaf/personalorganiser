@@ -10,8 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class TodoAdapter(
-    private val todos: MutableList<Todo>
-) : RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+    private val todoManager: TodoManager
+): RecyclerView.Adapter<TodoAdapter.TodoViewHolder>() {
+    private var todos: List<Todo> = todoManager.getAllTodos()
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvTodoTitle: TextView = itemView.findViewById(R.id.tvTodoTitle)
@@ -24,14 +25,14 @@ class TodoAdapter(
     }
 
     fun addTodo(todo: Todo) {
-        todos.add(todo)
-        notifyItemInserted(todos.size - 1)
+        todoManager.addTodo(todo)
+        todos = todoManager.getAllTodos()
+        notifyDataSetChanged()
     }
 
     fun deleteDoneTodos() {
-        todos.removeAll { todo ->
-            todo.isChecked
-        }
+        todoManager.deleteDoneTodos()
+        todos = todoManager.getAllTodos()
         notifyDataSetChanged()
     }
 
@@ -52,6 +53,7 @@ class TodoAdapter(
             holder.cbDone.setOnCheckedChangeListener { _, isChecked ->
                 toggleStrikeThrough(holder.tvTodoTitle, isChecked)
                 curTodo.isChecked = !curTodo.isChecked
+                todoManager.updateTodoById(curTodo.id, curTodo.title, curTodo.isChecked)
             }
         }
     }
@@ -59,4 +61,5 @@ class TodoAdapter(
     override fun getItemCount(): Int {
         return todos.size
     }
+
 }

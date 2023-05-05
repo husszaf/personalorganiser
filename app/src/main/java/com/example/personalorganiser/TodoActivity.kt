@@ -26,7 +26,8 @@ class TodoActivity : AppCompatActivity() {
         btnDeleteDoneTodos = findViewById(R.id.btnDeleteDoneTodos)
         etTodoTitle = findViewById(R.id.etTodoTitle)
 
-        todoAdapter = TodoAdapter(mutableListOf())
+        val todoManager = TodoManager(this)
+        todoAdapter = TodoAdapter(todoManager)
 
         rvTodoItems.adapter = todoAdapter
         rvTodoItems.layoutManager = LinearLayoutManager(this)
