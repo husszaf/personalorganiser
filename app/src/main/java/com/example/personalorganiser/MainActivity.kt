@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         //Schedule
         val scheduleButton = findViewById<Button>(R.id.schedule)
         scheduleButton.setOnClickListener {
-            val intent = Intent(this, ScheduleActivity::class.java)
+            val intent = Intent(this, AddReminderActivity::class.java)
             startActivity(intent)
         }
         
