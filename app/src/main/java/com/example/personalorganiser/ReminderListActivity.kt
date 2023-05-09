@@ -18,8 +18,10 @@ class ReminderListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reminder_list)
 
+        //get reminders from database
         val reminders = getRemindersFromDatabase()
 
+        //set up recycler view
         val reminderAdapter = ReminderAdapter(reminders)
         val recyclerView = findViewById<RecyclerView>(R.id.remindersRecyclerView)
         recyclerView.adapter = reminderAdapter
@@ -27,6 +29,7 @@ class ReminderListActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
+        // Show empty list message if there are no reminders
         emptyReminderTextView = findViewById(R.id.empty_reminder_text)
         if (reminders.isEmpty()) {
             emptyReminderTextView.visibility = View.VISIBLE
@@ -35,18 +38,22 @@ class ReminderListActivity : AppCompatActivity() {
         }
     }
 
+    // Query the database for reminders and convert the result to a list of Reminder objects
     private fun getRemindersFromDatabase(): MutableList<Reminder> {
         val dbHelper = ReminderDatabaseHelper(this)
         val db = dbHelper.readableDatabase
 
+        // Define the columns to retrieve from the table
         val projection = arrayOf(
             ReminderDatabaseHelper.COLUMN_ID,
             ReminderDatabaseHelper.COLUMN_TEXT,
             ReminderDatabaseHelper.COLUMN_DATE_TIME
         )
 
+        // Sort the results by date/time in ascending order
         val sortOrder = "${ReminderDatabaseHelper.COLUMN_DATE_TIME} ASC"
 
+        // Query the table for all records, order by date/time
         val cursor = db.query(
             ReminderDatabaseHelper.TABLE_REMINDER,
             projection,
@@ -59,6 +66,7 @@ class ReminderListActivity : AppCompatActivity() {
 
         val reminders = mutableListOf<Reminder>()
 
+        // Iterate through the cursor to create a list of Reminder objects
         with(cursor) {
             while (moveToNext()) {
                 val id = getLong(getColumnIndexOrThrow(ReminderDatabaseHelper.COLUMN_ID))

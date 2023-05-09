@@ -19,23 +19,28 @@ class ReminderDatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATAB
         public const val COLUMN_DATE_TIME = "date_time"
     }
 
+    // Called when the database is first created
     override fun onCreate(db: SQLiteDatabase) {
         val createTableSql = "CREATE TABLE $TABLE_REMINDER ($COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_TEXT TEXT, $COLUMN_DATE_TIME TEXT)"
         db.execSQL(createTableSql)
     }
 
+    // Called when the database needs to be upgraded
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         val dropTableSql = "DROP TABLE IF EXISTS $TABLE_REMINDER"
         db.execSQL(dropTableSql)
         onCreate(db)
     }
 
+    // Add a new reminder to the database
     fun addReminder(reminder: Reminder) {
         val db = writableDatabase
+        // Create a ContentValues object with the reminder data
         val values = ContentValues().apply {
             put(COLUMN_TEXT, reminder.text)
             put(COLUMN_DATE_TIME, SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(reminder.dateTime))
         }
+        // Insert the reminder into the database
         db.insert(TABLE_REMINDER, null, values)
         db.close()
     }

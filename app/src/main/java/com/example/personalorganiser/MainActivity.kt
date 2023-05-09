@@ -47,8 +47,8 @@ class MainActivity : AppCompatActivity() {
             builder.setTitle("App")
             builder.setMessage("What would you like to open?")
             builder.setPositiveButton("Write a note") { _: DialogInterface, _: Int ->
+
                 // do nothing, just dismiss the dialog
-                //dialog.dismiss()
                 val intent = Intent(this, WeatherActivity::class.java)
                 startActivity(intent)
             }
@@ -68,7 +68,6 @@ class MainActivity : AppCompatActivity() {
         builder.setMessage("Would you like to quit the app?")
         builder.setPositiveButton("Quit") { dialog: DialogInterface, _: Int ->
             // do nothing, just dismiss the dialog
-            //dialog.dismiss()
             finish()
         }
         builder.setNegativeButton("Close") { dialog: DialogInterface, _: Int ->

@@ -1,3 +1,4 @@
+//To-Do data class for the database
 data class Todo(
     val id: Long = 0,
     val title: String,

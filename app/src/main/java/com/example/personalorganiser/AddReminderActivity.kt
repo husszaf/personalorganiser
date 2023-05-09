@@ -17,6 +17,7 @@ import java.util.*
 
 class AddReminderActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
+    // Declaration of the necessary views
     private lateinit var etReminderText: EditText
     private lateinit var btnPickDate: Button
     private lateinit var btnPickTime: Button
@@ -25,12 +26,13 @@ class AddReminderActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
     private lateinit var selectedDate: TextView
     private lateinit var selectedTime: TextView
 
-    private lateinit var calendar: Calendar
+    private lateinit var calendar: Calendar // Calendar instance to store the selected date and time
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_reminder)
 
+        //Variables to find the view and store it
         etReminderText = findViewById(R.id.etReminderText)
         btnPickDate = findViewById(R.id.btnSelectDate)
         btnPickTime = findViewById(R.id.btnSelectTime)
@@ -40,9 +42,10 @@ class AddReminderActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         selectedDate = findViewById(R.id.selectedDate)
         selectedTime = findViewById(R.id.selectedTime)
 
-
+        // Initialize the Calendar instance
         calendar = Calendar.getInstance()
 
+        // Set up the click listeners for the date and time pickers
         btnPickDate.setOnClickListener {
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
@@ -56,6 +59,7 @@ class AddReminderActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
             TimePickerDialog(this, this, hour, minute, true).show()
         }
 
+        // Set up the click listeners for the "Add Reminder" and "View Reminder" buttons
         btnViewReminder.setOnClickListener {
             intent = Intent(this, ReminderListActivity::class.java)
             startActivity(intent)
@@ -71,11 +75,13 @@ class AddReminderActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
                     put(ReminderDatabaseHelper.COLUMN_DATE_TIME, dateTime)
                 }
 
+                // Insert the reminder into the database
                 val dbHelper = ReminderDatabaseHelper(this)
                 val db = dbHelper.writableDatabase
                 db.insert(ReminderDatabaseHelper.TABLE_REMINDER, null, values)
                 db.close()
 
+                // Open the reminder list activity and pass the reminder information to it
                 val intent = Intent(this, ReminderListActivity::class.java)
                 intent.putExtra("reminderText", reminderText)
                 intent.putExtra("dateTime", dateTime)
@@ -86,6 +92,7 @@ class AddReminderActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         }
     }
 
+    // These methods are called when the user selects a date or time in the respective dialogs
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
         calendar.set(Calendar.YEAR, year)
         calendar.set(Calendar.MONTH, month)
@@ -99,6 +106,7 @@ class AddReminderActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         updateSelectedDateTime()
     }
 
+    // Update the "Selected date" and "Selected time" TextViews with the selected date and time
     private fun updateSelectedDateTime() {
         val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
         val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())

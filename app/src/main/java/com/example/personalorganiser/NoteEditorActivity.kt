@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 
 class NoteEditorActivity : AppCompatActivity() {
 
+    //declarations of the views
     private lateinit var addNoteButton: FloatingActionButton
     private lateinit var noteListView: ListView
     private lateinit var adapter: ArrayAdapter<String>
@@ -27,6 +28,7 @@ class NoteEditorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_note_editor)
 
+        //find views by id
         addNoteButton = findViewById(R.id.floatingActionButton2)
         addNoteButton.setOnClickListener {
             val intent = Intent(this, AddNoteActivity::class.java)
@@ -40,6 +42,7 @@ class NoteEditorActivity : AppCompatActivity() {
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, notes.map { it.text })
         noteListView.adapter = adapter
 
+        //check if the database is empty. then if empty show it else hide the view
         emptyNotesTextView = findViewById(R.id.empty_text)
         if (notes.isEmpty()) {
             emptyNotesTextView.visibility = View.VISIBLE
@@ -47,6 +50,7 @@ class NoteEditorActivity : AppCompatActivity() {
             emptyNotesTextView.visibility = View.GONE
         }
 
+        //if the note list is long pressed, ask if the note has to be deleted
         noteListView.setOnItemLongClickListener { _, _, position, _ ->
             val builder = AlertDialog.Builder(this@NoteEditorActivity)
             builder.setTitle("Delete note?")
@@ -70,6 +74,7 @@ class NoteEditorActivity : AppCompatActivity() {
 
 
     }
+
 
     override fun onResume() {
         super.onResume()
