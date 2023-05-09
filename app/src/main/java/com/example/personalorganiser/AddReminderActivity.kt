@@ -8,8 +8,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
+import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,6 +21,9 @@ class AddReminderActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
     private lateinit var btnPickDate: Button
     private lateinit var btnPickTime: Button
     private lateinit var btnAddReminder: Button
+    private lateinit var btnViewReminder: Button
+    private lateinit var selectedDate: TextView
+    private lateinit var selectedTime: TextView
 
     private lateinit var calendar: Calendar
 
@@ -30,6 +35,11 @@ class AddReminderActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         btnPickDate = findViewById(R.id.btnSelectDate)
         btnPickTime = findViewById(R.id.btnSelectTime)
         btnAddReminder = findViewById(R.id.btnAddReminder)
+        btnViewReminder = findViewById(R.id.btnViewReminder)
+
+        selectedDate = findViewById(R.id.selectedDate)
+        selectedTime = findViewById(R.id.selectedTime)
+
 
         calendar = Calendar.getInstance()
 
@@ -44,6 +54,11 @@ class AddReminderActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
             val minute = calendar.get(Calendar.MINUTE)
             TimePickerDialog(this, this, hour, minute, true).show()
+        }
+
+        btnViewReminder.setOnClickListener {
+            intent = Intent(this, ReminderListActivity::class.java)
+            startActivity(intent)
         }
 
         btnAddReminder.setOnClickListener {
@@ -75,10 +90,20 @@ class AddReminderActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListe
         calendar.set(Calendar.YEAR, year)
         calendar.set(Calendar.MONTH, month)
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+        updateSelectedDateTime()
     }
 
     override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
         calendar.set(Calendar.MINUTE, minute)
+        updateSelectedDateTime()
     }
+
+    private fun updateSelectedDateTime() {
+        val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
+        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        selectedDate.text = "Selected date: " + dateFormat.format(calendar.time)
+        selectedTime.text = "Selected Time: " + timeFormat.format(calendar.time)
+    }
+
 }

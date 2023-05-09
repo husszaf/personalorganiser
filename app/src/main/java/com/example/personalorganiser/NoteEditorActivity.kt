@@ -11,6 +11,8 @@ import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.core.content.ContextCompat
+
 
 class NoteEditorActivity : AppCompatActivity() {
 

@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        
+
         //Every time the app is launched or refreshed it will show a Toast
         Toast.makeText(this, "App Initialized", Toast.LENGTH_SHORT).show()
 
@@ -30,10 +30,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, AddReminderActivity::class.java)
             startActivity(intent)
         }
-        
+
         //reminder
         val reminderButton = findViewById<Button>(R.id.reminder)
-        reminderButton.setOnClickListener { 
+        reminderButton.setOnClickListener {
             val intent = Intent(this, TodoActivity::class.java)
             startActivity(intent)
         }
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             builder.setPositiveButton("Write a note") { _: DialogInterface, _: Int ->
                 // do nothing, just dismiss the dialog
                 //dialog.dismiss()
-                val intent = Intent(this, AddNoteActivity::class.java)
+                val intent = Intent(this, WeatherActivity::class.java)
                 startActivity(intent)
             }
             builder.setNegativeButton("Close") { dialog: DialogInterface, _: Int ->

@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".TodoActivity">
+    tools:context=".TodoActivity"
+    android:background="@color/dark_brown">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTodoItems"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@color/dark_brown"
         app:layout_constraintBottom_toTopOf="@+id/etTodoTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,6 +35,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Enter Todo Title"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnAddTodo"
         app:layout_constraintStart_toStartOf="parent" />
@@ -40,6 +44,8 @@
         android:id="@+id/btnAddTodo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/light_brown"
+        android:textColor="@color/white"
         android:text="Add Todo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnDeleteDoneTodos" />
@@ -48,6 +54,8 @@
         android:id="@+id/btnDeleteDoneTodos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/light_brown"
+        android:textColor="@color/white"
         android:text="Delete done"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

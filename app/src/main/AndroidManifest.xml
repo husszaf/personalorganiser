@@ -2,6 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"></uses-permission>
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+
+
+
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,6 +29,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="31">
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -21,9 +40,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".NoteEditorActivity" />
-        <activity android:name=".ScheduleActivity" />
+        <activity android:name=".AddReminderActivity" />
         <activity android:name=".AddNoteActivity" />
         <activity android:name=".TodoActivity" />
+        <activity android:name=".ReminderListActivity" />
+        <activity android:name=".WeatherActivity" />
+
+
     </application>
 
 </manifest>

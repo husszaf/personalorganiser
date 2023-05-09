@@ -12,6 +12,8 @@ import java.util.Locale
 
 class ReminderListActivity : AppCompatActivity() {
 
+    private lateinit var emptyReminderTextView: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reminder_list)
@@ -25,9 +27,15 @@ class ReminderListActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
 
+        emptyReminderTextView = findViewById(R.id.empty_reminder_text)
+        if (reminders.isEmpty()) {
+            emptyReminderTextView.visibility = View.VISIBLE
+        } else {
+            emptyReminderTextView.visibility = View.GONE
+        }
     }
 
-    private fun getRemindersFromDatabase(): List<Reminder> {
+    private fun getRemindersFromDatabase(): MutableList<Reminder> {
         val dbHelper = ReminderDatabaseHelper(this)
         val db = dbHelper.readableDatabase
 
@@ -65,6 +73,4 @@ class ReminderListActivity : AppCompatActivity() {
         cursor.close()
         return reminders
     }
-
-
 }

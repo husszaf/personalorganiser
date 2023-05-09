@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:paddingStart="8dp"
-    android:paddingEnd="8dp">
+    android:paddingEnd="8dp"
+    android:background="@color/light_brown">
 
     <TextView
         android:id="@+id/tvTodoTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Example"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         android:textSize="24sp"
         android:paddingStart="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,6 +26,7 @@
         android:id="@+id/cbDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/light_brown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
